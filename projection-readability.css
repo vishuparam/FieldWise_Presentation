@@ -1,0 +1,11 @@
+/* Projector readability adjustments: Slides 3 and 4 only. */
+#slide-3 .validation strong{font-size:18px;line-height:1.25}
+#slide-3 .validation p{font-size:16px;line-height:1.48;margin-top:10px}
+#slide-4 .chart-card .chart-legend{font-size:14px;gap:20px;line-height:1.35;margin-top:6px}
+#slide-4 .chart-card .chart-legend span::before{width:12px;height:12px;margin-right:7px}
+#slide-4 .chart-card .source-note{font-size:13px;line-height:1.4;margin-top:10px}
+#slide-4 .result-summary{gap:42px;padding-top:24px}
+#slide-4 .result-summary .result-number{font-size:46px}
+#slide-4 .result-summary .result-number small{font-size:16px}
+#slide-4 .result-summary p{font-size:19px;line-height:1.45}
+@media(max-height:760px) and (min-width:901px){#slide-3 .validation strong{font-size:16px}#slide-3 .validation p{font-size:14px}#slide-4 .chart-card .chart-legend{font-size:12px}#slide-4 .chart-card .source-note{font-size:11px}#slide-4 .result-summary .result-number{font-size:40px}#slide-4 .result-summary p{font-size:17px}}

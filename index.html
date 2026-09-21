@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173e2e">
+  <title>FieldWise · A season worth choosing</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="slide5.css">
+  <link rel="stylesheet" href="projection-readability.css">
+  <link rel="stylesheet" href="presentation-fit.css">
+  <script defer src="evidence.js"></script>
+  <script defer src="content.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="#1" aria-label="FieldWise, first slide"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>FieldWise<span class="brand-sub">BREEDING INTELLIGENCE</span></a>
+    <span class="event">LIONHOGTECH <span>AI AGRICULTURE HACKATHON</span></span>
+  </header>
+  <main id="deck" aria-label="Five-minute FieldWise presentation plus post-pitch demo"></main>
+  <footer class="deck-footer">
+    <nav id="field-nav" aria-label="Slide navigation"></nav>
+    <div class="controls">
+      <button class="quiet" id="notes-button" title="Speaker notes (N)">Notes <kbd>N</kbd></button>
+      <button class="quiet" id="clock-button" title="Start or pause rehearsal clock (T)"><span id="clock">0:00</span><span class="clock-limit"> / 5:00</span></button>
+      <button class="quiet" id="fullscreen-button" title="Fullscreen (F)" aria-label="Toggle fullscreen">⛶</button>
+      <button class="arrow-button" id="previous" aria-label="Previous slide">←</button>
+      <span id="page-count" aria-live="polite">01 / 06</span>
+      <button class="arrow-button" id="next" aria-label="Next slide">→</button>
+    </div>
+  </footer>
+  <aside id="notes" class="notes" hidden aria-label="Speaker notes">
+    <div class="notes-head"><span id="notes-timing"></span><button class="quiet" id="notes-close" aria-label="Close notes">Close ×</button></div>
+    <div id="notes-copy"></div>
+    <div class="notes-actions"><button class="quiet" id="rubric-button">Judging rubric</button><button class="quiet" id="reset-clock">Reset rehearsal clock</button></div>
+  </aside>
+  <dialog id="rubric-dialog">
+    <div class="dialog-heading"><span class="eyebrow">OFFICIAL JUDGING RUBRIC</span><button class="quiet" data-close="rubric-dialog" aria-label="Close rubric">×</button></div>
+    <h2>100 points. Five minutes.</h2>
+    <div class="rubric-row"><strong>25</strong><div><h3>Approach & originality</h3><p>Clear goal, distinctive method, and a reason it could work better. Pitch sections 1–2.</p></div></div>
+    <div class="rubric-row"><strong>20</strong><div><h3>Data structure & method</h3><p>Only used inputs, exact links, cleaning, model, and genuinely unseen test data. Section 3.</p></div></div>
+    <div class="rubric-row"><strong>25</strong><div><h3>Results visualization</h3><p>At most two aligned charts, takeaway titles, axes, and units. Section 5.</p></div></div>
+    <div class="rubric-row"><strong>30</strong><div><h3>Interpretation & decision</h3><p>Plain accuracy, named line decisions, evidence for broad/site choice, plot opportunity, specific limits. Sections 5–6.</p></div></div>
+    <p class="form-hint">Up to 3 points deducted after 5:00. No early-finish bonus. Either broad or site-specific prediction is valid when justified. Honest limits are rewarded. The workbook scores held-out prediction accuracy separately; the presentation must still explain its validation.</p>
+    <p class="source-note">Source: LionHogTech_Hackathon_Score_Sheet.xlsx / Rubric. Slides 1–5 form the timed pitch. The live dashboard demo follows after the pitch.</p>
+  </dialog>
+  <section id="demo-overlay" hidden aria-label="Live dashboard" role="dialog" aria-modal="true">
+    <div class="demo-bar"><div class="demo-brand">FieldWise <span id="demo-status">LIVE WEBSITE</span></div><div class="demo-tabs"><button id="live-tab" class="active">Live website</button><button id="snapshot-tab">Saved output</button></div><button class="primary" id="return-demo">Return to pitch →</button></div>
+    <div id="live-pane"><div class="connection-note">Local dashboard must be running. If the site cannot embed, <a id="external-demo" target="_blank" rel="noopener noreferrer">open the website</a> or choose <button id="fallback-button">Saved output</button>. <span>Browser focus inside the website may capture clicker keys; the return button always stays visible.</span></div><iframe id="dashboard-frame" title="Existing FieldWise live dashboard" allow="fullscreen"></iframe></div>
+    <div id="snapshot-pane" hidden><div class="snapshot-heading"><div><span class="eyebrow">SAVED PROJECT OUTPUT · OFFLINE FALLBACK</span><h2>Every line has a decision behind it</h2><p>Existing yield scores, in bu/acre. Exploratory retest only. These are not GCA estimates.</p></div><label>Find a line<input type="search" id="line-search" placeholder="Search line or population"></label></div><div class="snapshot-layout"><div class="table-wrap"><table><caption id="table-caption">Saved candidates ranked by the fixed risk-adjusted score</caption><thead><tr><th>Rank</th><th>Candidate line</th><th>Predicted yield<br><small>bu/acre</small></th><th>Risk-adjusted score<br><small>bu/acre</small></th></tr></thead><tbody id="candidate-rows"></tbody></table></div><aside id="line-detail" aria-live="polite"></aside></div></div>
+  </section>
+  <div class="sr-only" id="announcement" role="status" aria-live="polite"></div>
+</body>
+</html>
