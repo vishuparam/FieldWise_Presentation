@@ -40,7 +40,8 @@
     $('announcement').textContent=`Slide ${index+1}: ${notes.labels[index]}`;
   }
   function chartSVG({title,series,groups,xLabel,yLabel,min,max,ticks}) {
-    const w=510,h=264,left=61,right=17,top=35,bottom=50,pw=w-left-right,ph=h-top-bottom;
+    const tallScreen=window.innerHeight>=900;
+    const w=510,h=tallScreen?360:264,left=61,right=17,top=tallScreen?46:35,bottom=tallScreen?64:50,pw=w-left-right,ph=h-top-bottom;
     const y=value=>top+(max-value)/(max-min)*ph;
     const tx=(x,yy,value,extra='')=>`<text x="${x}" y="${yy}" fill="#53654f" font-family="Segoe UI,sans-serif" font-size="13" ${extra}>${esc(value)}</text>`;
     let svg=`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(title)}"><title>${esc(title)}</title><desc>${esc(series.map(s=>`${s.label}: ${s.values.map((v,i)=>`${groups[i]} ${v.toFixed(2)} bu/acre`).join(', ')}`).join('. '))}</desc>${tx(left,17,yLabel,'font-size="12"')}`;
@@ -69,6 +70,7 @@
   $('field-nav').addEventListener('click',event=>{const button=event.target.closest('[data-slide]');if(button)show(Number(button.dataset.slide));});
   $('previous').addEventListener('click',()=>show(index-1)); $('next').addEventListener('click',()=>show(index+1)); $('notes-button').addEventListener('click',toggleNotes); $('notes-close').addEventListener('click',toggleNotes); $('clock-button').addEventListener('click',toggleClock); $('reset-clock').addEventListener('click',()=>{elapsed=0;runningSince=null;updateClock();}); $('fullscreen-button').addEventListener('click',toggleFullscreen); $('rubric-button').addEventListener('click',()=>$('rubric-dialog').showModal()); document.querySelectorAll('[data-close]').forEach(button=>button.addEventListener('click',()=>$(button.dataset.close).close())); $('return-demo').addEventListener('click',closeDemo); $('live-tab').addEventListener('click',()=>setDemoPane('live')); $('snapshot-tab').addEventListener('click',()=>setDemoPane('snapshot')); $('fallback-button').addEventListener('click',()=>setDemoPane('snapshot')); $('line-search').addEventListener('input',renderCandidates); $('candidate-rows').addEventListener('click',event=>{const button=event.target.closest('[data-line]');if(button){selectedId=button.dataset.line;renderDetail();}});
   window.addEventListener('hashchange',()=>show(Math.max(0,Math.min(5,(Number(location.hash.slice(1))||1)-1)),false));
+  window.addEventListener('resize',renderCharts);
   document.addEventListener('keydown',event=>{if(document.querySelector('dialog[open]'))return;if(event.key==='Escape'){if(!$('demo-overlay').hidden)closeDemo();else if(!$('notes').hidden)toggleNotes();return;}if(event.ctrlKey||event.altKey||event.metaKey||/INPUT|TEXTAREA|SELECT/.test(event.target.tagName)||!$('demo-overlay').hidden)return;const key=event.key.toLowerCase();if(['arrowright','arrowdown','pagedown',' '].includes(key)){event.preventDefault();show(index+1);}else if(['arrowleft','arrowup','pageup'].includes(key)){event.preventDefault();show(index-1);}else if(key==='home'){event.preventDefault();show(0);}else if(key==='end'){event.preventDefault();show(5);}else if(key==='n')toggleNotes();else if(key==='t')toggleClock();else if(key==='f')toggleFullscreen();else if(key==='d'){show(5);openDemo();}});
   render(); updateClock(); setInterval(updateClock,250);
 })();
